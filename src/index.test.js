@@ -11,12 +11,12 @@ describe('Level 1 test',  function() {
 });
 
 describe('It should say Hello', function() {
-    it('should say hello', function () {
+    it('should say Users', function () {
         const win = new jsdom.JSDOM(
             fs.readFileSync('./src/index.html','utf-8') // read contents of the file as a string
         ).window;
         const h1 = win.document.getElementsByTagName('h1')[0];
-        expect(h1.innerHTML).to.equal('Hello Kannu');
+        expect(h1.innerHTML).to.equal('Users');
         win.close();
     });
 });

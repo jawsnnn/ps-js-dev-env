@@ -1,0 +1,27 @@
+/* This script generates mock JSON data using the schema defined in
+    ./mockDataSchema.js. This is used to create a local static data source
+    for building a test API*/
+
+
+import jsf from "json-schema-faker";
+import {schema} from "./mockDataSchema";
+import fs from "fs";
+import chalk from "chalk";
+import faker from "faker";
+
+/*eslint-disable no-console*/
+
+jsf.extend('faker', function(){
+    return faker;
+});
+
+const json = JSON.stringify(jsf(schema));
+
+fs.writeFile('./src/api/db.json', json, function(err) {
+    if (err) {
+        return console.log(chalk.red(err));
+    }
+    else {
+        console.log(chalk.green("JSON data generated"));
+    }
+});

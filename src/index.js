@@ -1,4 +1,15 @@
-import './index.css';
-import numeral from 'numeral';
-var price = numeral(1000).format('$0,00.00');
-console.log(`This is a fine day for earning ${price}`); //eslint-disable-line no-console
+import {getUsers} from './api/userAPI';
+
+getUsers().then(result => {
+    console.log(result); //eslint-disable-line no-console
+    var usersBody  = "";
+    result.forEach(user => {
+        usersBody += `<tr>
+            <td><a href = "#" data-id = "${user.id}" class = "deleteUser">Delete</a></td>
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+        </tr>`
+    });
+    global.document.getElementById('users').innerHTML = usersBody;
+});
